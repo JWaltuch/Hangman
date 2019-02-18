@@ -105,11 +105,12 @@ end
 def check_if_man_is_hung
 end
 
-def check_if_word_is_complete
+def check_if_word_is_complete(word, empty_word)
+  word != empty_word.join("")
 end
 
-def player_wins_or_loses(player_name)
-  wins = check_if_wins
+def player_wins_or_loses(player_name, word, empty_word)
+  wins = check_if_wins(word, empty_word)
   if wins
     display_winner_message(player_name)
   else
