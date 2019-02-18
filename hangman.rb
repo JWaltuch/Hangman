@@ -115,13 +115,15 @@ def add_line_to_man(wrong_answers)
   elsif wrong_answers == 2
     puts("O\n|")
   elsif wrong_answers == 3
-    puts("  O\n\ |")
+    puts("  O\n\\ |")
   elsif wrong_answers == 4
-    puts("  O\n\ |  /")
+    puts("  O\n\\ |  /")
   elsif wrong_answers == 5
-    puts("  O\n\ |  /\n/")
+    puts("  O\n\\ |  /\n  |\n")
   elsif wrong_answers == 6
-    puts("  O\n\ |  /\n/   \ ")
+    puts("  O\n\\ |  /\n  |\n/")
+  elsif wrong_answers == 7
+    puts("  O\n\\ |  /\n  |\n/   \\ ")
   end
 end
 
