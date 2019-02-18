@@ -9,6 +9,7 @@ def game_start
   while man_is_not_hung && word_is_incomplete
     letter = player_chooses_letters(player_name)
     check_if_in_word(letter, word, empty_word)
+    display_empty_word(empty_word)
     man_is_not_hung = check_if_man_is_hung
     word_is_incomplete = check_if_word_is_complete
   end
@@ -94,7 +95,7 @@ def add_letter_to_word(letter, word, empty_word)
     if character == letter
       empty_word[i] = letter
     end
-    i += 2
+    i += 1
   end
 end
 
