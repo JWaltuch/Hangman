@@ -6,9 +6,10 @@ def game_start
   display_empty_word(empty_word)
   man_is_not_hung = true
   word_is_incomplete = true
+  wrong_answers = 0
   while man_is_not_hung && word_is_incomplete
     letter = player_chooses_letters(player_name)
-    check_if_in_word(letter, word, empty_word)
+    check_if_in_word(letter, word, empty_word, wrong_answers)
     display_empty_word(empty_word)
     man_is_not_hung = check_if_man_is_hung
     word_is_incomplete = check_if_word_is_complete(word, empty_word)
@@ -59,14 +60,15 @@ def get_letter
   letter = gets.chomp.to_s
 end
 
-def check_if_in_word(letter, word, empty_word)
+def check_if_in_word(letter, word, empty_word, wrong_answers)
   is_in_word = find_letter_in_word(word, letter)
   if is_in_word
     display_successful_guess_message(letter)
     add_letter_to_word(letter, word, empty_word)
   else
     display_bad_guess_message(letter)
-    add_line_to_man
+    wrong_answers += 1
+    add_line_to_man(wrong_answers)
   end
 end
 
@@ -99,10 +101,24 @@ def add_letter_to_word(letter, word, empty_word)
   end
 end
 
-def add_line_to_man
+def add_line_to_man(wrong_answers)
+  if wrong_answers == 1
+    puts("O")
+  elsif wrong_answers == 2
+    puts("O\n|")
+  elsif wrong_answers == 3
+    puts("  O\n\ |")
+  elsif wrong_answers == 4
+    puts("  O\n\ |  /")
+  elsif wrong_answers == 5
+    puts("  O\n\ |  /\n/")
+  elsif wrong_answers == 6
+    puts("  O\n\ |  /\n/   \ ")
+  end
 end
 
 def check_if_man_is_hung
+  true
 end
 
 def check_if_word_is_complete(word, empty_word)
