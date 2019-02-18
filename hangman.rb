@@ -123,9 +123,11 @@ def check_if_wins(word, empty_word)
 end
 
 def display_winner_message(player_name)
+  puts("You've guessed the word, " + player_name + ". You win!")
 end
 
 def display_loser_message(player_name)
+  puts("You've failed to guess the word, " + player_name + ". You lose :(")
 end
 
 game_start
