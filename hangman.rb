@@ -118,7 +118,8 @@ def player_wins_or_loses(player_name, word, empty_word)
   end
 end
 
-def check_if_wins
+def check_if_wins(word, empty_word)
+  word == empty_word.join("")
 end
 
 def display_winner_message(player_name)
