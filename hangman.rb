@@ -17,7 +17,7 @@ def game_start
       resolve_bad_guess(letter, wrong_answers)
     end
     display_empty_word(empty_word)
-    man_is_not_hung = check_if_man_is_hung
+    man_is_not_hung = check_if_man_is_hung(wrong_answers)
     word_is_incomplete = check_if_word_is_complete(word, empty_word)
   end
   player_wins_or_loses(player_name, word, empty_word)
@@ -127,8 +127,8 @@ def add_line_to_man(wrong_answers)
   end
 end
 
-def check_if_man_is_hung
-  true
+def check_if_man_is_hung(wrong_answers)
+  wrong_answers < 7
 end
 
 def check_if_word_is_complete(word, empty_word)
