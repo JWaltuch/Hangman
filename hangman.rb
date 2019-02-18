@@ -9,7 +9,13 @@ def game_start
   wrong_answers = 0
   while man_is_not_hung && word_is_incomplete
     letter = player_chooses_letters(player_name)
-    check_if_in_word(letter, word, empty_word, wrong_answers)
+    is_in_word = check_if_in_word(letter, word)
+    if is_in_word
+      resolve_successful_guess(letter, word, empty_word)
+    else
+      wrong_answers += 1
+      resolve_bad_guess(letter, wrong_answers)
+    end
     display_empty_word(empty_word)
     man_is_not_hung = check_if_man_is_hung
     word_is_incomplete = check_if_word_is_complete(word, empty_word)
@@ -60,16 +66,18 @@ def get_letter
   letter = gets.chomp.to_s
 end
 
-def check_if_in_word(letter, word, empty_word, wrong_answers)
+def check_if_in_word(letter, word)
   is_in_word = find_letter_in_word(word, letter)
-  if is_in_word
-    display_successful_guess_message(letter)
-    add_letter_to_word(letter, word, empty_word)
-  else
-    display_bad_guess_message(letter)
-    wrong_answers += 1
-    add_line_to_man(wrong_answers)
-  end
+end
+
+def resolve_successful_guess(letter, word, empty_word)
+  display_successful_guess_message(letter)
+  add_letter_to_word(letter, word, empty_word)
+end
+
+def resolve_bad_guess(letter, wrong_answers)
+  display_bad_guess_message(letter)
+  add_line_to_man(wrong_answers)
 end
 
 def find_letter_in_word(word, letter)
