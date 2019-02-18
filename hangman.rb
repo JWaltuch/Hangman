@@ -11,9 +11,9 @@ def game_start
     check_if_in_word(letter, word, empty_word)
     display_empty_word(empty_word)
     man_is_not_hung = check_if_man_is_hung
-    word_is_incomplete = check_if_word_is_complete
+    word_is_incomplete = check_if_word_is_complete(word, empty_word)
   end
-  player_wins_or_loses(player_name)
+  player_wins_or_loses(player_name, word, empty_word)
 end
 
 def get_player_name
