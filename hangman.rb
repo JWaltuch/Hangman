@@ -4,10 +4,9 @@ def game_start
   word = generate_word
   empty_word = get_empty_word(word)
   display_empty_word(empty_word)
-  man_is_not_hung = true
   word_is_incomplete = true
   wrong_answers = 0
-  while man_is_not_hung && word_is_incomplete
+  while word_is_incomplete && wrong_answers < 7
     letter = player_chooses_letters(player_name)
     is_in_word = check_if_in_word(letter, word)
     if is_in_word
@@ -17,7 +16,6 @@ def game_start
       resolve_bad_guess(letter, wrong_answers)
     end
     display_empty_word(empty_word)
-    man_is_not_hung = check_if_man_is_hung(wrong_answers)
     word_is_incomplete = check_if_word_is_complete(word, empty_word)
   end
   player_wins_or_loses(player_name, word, empty_word)
@@ -125,10 +123,6 @@ def add_line_to_man(wrong_answers)
   elsif wrong_answers == 7
     puts("  O\n\\ |  /\n  |\n/   \\ ")
   end
-end
-
-def check_if_man_is_hung(wrong_answers)
-  wrong_answers < 7
 end
 
 def check_if_word_is_complete(word, empty_word)
