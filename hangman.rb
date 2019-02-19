@@ -31,7 +31,10 @@ def greet_player(player_name)
 end
 
 def generate_word
-  "word"
+  dictionary = File.read("dictionary.txt")
+  dictionary = dictionary.split("\n")
+  randomizer = rand(0..dictionary.length).to_i
+  dictionary[randomizer]
 end
 
 def display_empty_word(empty_word)
