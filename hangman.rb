@@ -1,8 +1,8 @@
 def game_start
+  dictionary_name = choose_dictionary
+  word = generate_word(dictionary_name)
   player_name = get_player_name
   greet_player(player_name)
-  dictionary_name = choose_dictionary
-  word = generate_word
   empty_word = get_empty_word(word)
   display_empty_word(empty_word)
   word_is_incomplete = true
@@ -22,27 +22,29 @@ def game_start
   player_wins_or_loses(player_name, word, empty_word)
 end
 
+def choose_dictionary
+  if /\w+/ =~ ARGV[0]
+    dictionary_name = ARGV[0].chomp.to_s
+  else
+    dictionary_name = "dictionary.rtf"
+  end
+end
+
+def generate_word(dictionary_name)
+  dictionary = File.read(dictionary_name)
+  dictionary = dictionary.split("\n")
+  randomizer = rand(0..dictionary.length).to_i
+  dictionary[randomizer].to_s
+end
+
 def get_player_name
+  ARGV.clear
   puts("Hello, player. What is your name?")
   name = gets.chomp.to_s
 end
 
 def greet_player(player_name)
   puts("Hello, " + player_name + ". Let's play Hangman.")
-end
-
-def choose_dictionary
-  #!/usr/bin/env ruby
-ARGV.each do|a|
-  puts "Argument: #{a}"
-end
-end
-
-def generate_word
-  dictionary = File.read("dictionary.rtf")
-  dictionary = dictionary.split("\n")
-  randomizer = rand(0..dictionary.length).to_i
-  dictionary[randomizer]
 end
 
 def display_empty_word(empty_word)
@@ -149,7 +151,7 @@ def player_wins_or_loses(player_name, word, empty_word)
   if wins
     display_winner_message(player_name)
   else
-    display_loser_message(player_name)
+    display_loser_message(player_name, word)
   end
 end
 
