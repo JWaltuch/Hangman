@@ -73,6 +73,10 @@ end
 
 def get_letter
   letter = gets.chomp.to_s
+  while /\w/ =~ letter
+    puts("This is not a letter of the alphabet. Please guess a valid letter.")
+    letter = gets.chomp.to_s
+  end
 end
 
 def check_if_in_word(letter, word)
