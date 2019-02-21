@@ -1,6 +1,7 @@
 def game_start
   player_name = get_player_name
   greet_player(player_name)
+  dictionary_name = choose_dictionary
   word = generate_word
   empty_word = get_empty_word(word)
   display_empty_word(empty_word)
@@ -28,6 +29,13 @@ end
 
 def greet_player(player_name)
   puts("Hello, " + player_name + ". Let's play Hangman.")
+end
+
+def choose_dictionary
+  #!/usr/bin/env ruby
+ARGV.each do|a|
+  puts "Argument: #{a}"
+end
 end
 
 def generate_word
