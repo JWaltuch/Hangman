@@ -1,6 +1,5 @@
 def game_start
-  dictionary_name = choose_dictionary
-  word = generate_word(dictionary_name)
+  word = generate_word
   player_name = get_player_name
   greet_player(player_name)
   empty_word = get_empty_word(word)
@@ -22,19 +21,20 @@ def game_start
   player_wins_or_loses(player_name, word, empty_word)
 end
 
+def generate_word
+  dictionary_name = choose_dictionary
+  dictionary = File.read(dictionary_name)
+  dictionary = dictionary.split("\n")
+  randomizer = rand(0..dictionary.length).to_i
+  dictionary[randomizer].to_s
+end
+
 def choose_dictionary
   if /\w+/ =~ ARGV[0]
     dictionary_name = ARGV[0].chomp.to_s
   else
     dictionary_name = "dictionary.rtf"
   end
-end
-
-def generate_word(dictionary_name)
-  dictionary = File.read(dictionary_name)
-  dictionary = dictionary.split("\n")
-  randomizer = rand(0..dictionary.length).to_i
-  dictionary[randomizer].to_s
 end
 
 def get_player_name
