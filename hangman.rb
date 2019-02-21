@@ -31,7 +31,7 @@ def greet_player(player_name)
 end
 
 def generate_word
-  dictionary = File.read("dictionary.txt")
+  dictionary = File.read("dictionary.rtf")
   dictionary = dictionary.split("\n")
   randomizer = rand(0..dictionary.length).to_i
   dictionary[randomizer]
