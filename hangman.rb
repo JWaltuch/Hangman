@@ -161,8 +161,9 @@ def display_winner_message(player_name)
   puts("You've guessed the word, " + player_name + ". You win!")
 end
 
-def display_loser_message(player_name)
-  puts("You've failed to guess the word, " + player_name + ". You lose :(")
+def display_loser_message(player_name, word)
+  puts("You've failed to guess the word, " + player_name + ". You lose :(\n")
+  puts("The word was: " + word)
 end
 
 game_start
