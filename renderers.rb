@@ -1,7 +1,7 @@
 class SimpleRenderer
   def self.simple_render(num_errors, body_parts)
-    parts = body_parts.each_with_index.map { |x,i| 
-      if num_errors > i then x else "" end 
+    parts = body_parts.each_with_index.map { |x,i|
+      if num_errors > i then x else "" end
     }
     output = sprintf(
       ["+----",
@@ -26,8 +26,8 @@ class EmojiRenderer
   end
 end
 
-renderer = SimpleRenderer.new()
+# renderer = SimpleRenderer.new()
 # renderer = EmojiRenderer.new()
-for i in 0..7
-  puts(renderer.render(i))
-end
+# for i in 0..7
+#   puts(renderer.render(i))
+# end
