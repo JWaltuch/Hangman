@@ -2,18 +2,19 @@ def game_start
   word = generate_word
   player_name = get_player_name
   greet_player(player_name)
+  display_method = get_display_method_from_player
   empty_word = get_empty_word(word)
   display_empty_word(empty_word)
   word_is_incomplete = true
   wrong_answers = 0
-  while word_is_incomplete && wrong_answers < 7
+  while word_is_incomplete && wrong_answers < 6
     letter = player_chooses_letters(player_name)
     is_in_word = check_if_in_word(letter, word)
     if is_in_word
       resolve_successful_guess(letter, word, empty_word)
     else
       wrong_answers += 1
-      resolve_bad_guess(letter, wrong_answers)
+      resolve_bad_guess(letter, wrong_answers, display_method)
     end
     display_empty_word(empty_word)
     word_is_incomplete = check_if_word_is_complete(word, empty_word)
@@ -45,6 +46,19 @@ end
 
 def greet_player(player_name)
   puts("Hello, " + player_name + ". Let's play Hangman.")
+end
+
+def get_display_method_from_player
+  puts("How would you like your Hangman displayed?\nOptions:\n")
+  puts("1. Basic lines \n2. Basic lines with noose")
+  puts("3. Emojis \n4. GUI rendering\n")
+  puts("Choose 1, 2, 3, or 4")
+  method_number = gets.chomp.to_i
+  unless /[1-4]/ =~ method_number.to_s
+    puts("Please make a valid choice of 1-4.")
+    method_number = gets.chomp.to_i
+  end
+  method_number
 end
 
 def display_empty_word(empty_word)
@@ -91,7 +105,7 @@ def resolve_successful_guess(letter, word, empty_word)
   add_letter_to_word(letter, word, empty_word)
 end
 
-def resolve_bad_guess(letter, wrong_answers)
+def resolve_bad_guess(letter, wrong_answers, display_method)
   display_bad_guess_message(letter)
   renderer = LittleManRenderer.new()
   renderer.render(wrong_answers)
@@ -137,10 +151,8 @@ class LittleManRenderer
     elsif wrong_answers == 4
       puts("  O\n\\ |  /")
     elsif wrong_answers == 5
-      puts("  O\n\\ |  /\n  |\n")
-    elsif wrong_answers == 6
       puts("  O\n\\ |  /\n  |\n/")
-    elsif wrong_answers == 7
+    elsif wrong_answers == 6
       puts("  O\n\\ |  /\n  |\n/   \\ ")
     end
   end
