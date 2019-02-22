@@ -93,7 +93,8 @@ end
 
 def resolve_bad_guess(letter, wrong_answers)
   display_bad_guess_message(letter)
-  add_line_to_man(wrong_answers)
+  renderer = LittleManRenderer.new()
+  renderer.render(wrong_answers)
 end
 
 def find_letter_in_word(word, letter)
@@ -125,23 +126,43 @@ def add_letter_to_word(letter, word, empty_word)
   end
 end
 
-def add_line_to_man(wrong_answers)
-  if wrong_answers == 1
-    puts("O")
-  elsif wrong_answers == 2
-    puts("O\n|")
-  elsif wrong_answers == 3
-    puts("  O\n\\ |")
-  elsif wrong_answers == 4
-    puts("  O\n\\ |  /")
-  elsif wrong_answers == 5
-    puts("  O\n\\ |  /\n  |\n")
-  elsif wrong_answers == 6
-    puts("  O\n\\ |  /\n  |\n/")
-  elsif wrong_answers == 7
-    puts("  O\n\\ |  /\n  |\n/   \\ ")
+class LittleManRenderer
+  def render(wrong_answers)
+    if wrong_answers == 1
+      puts("O")
+    elsif wrong_answers == 2
+      puts("O\n|")
+    elsif wrong_answers == 3
+      puts("  O\n\\ |")
+    elsif wrong_answers == 4
+      puts("  O\n\\ |  /")
+    elsif wrong_answers == 5
+      puts("  O\n\\ |  /\n  |\n")
+    elsif wrong_answers == 6
+      puts("  O\n\\ |  /\n  |\n/")
+    elsif wrong_answers == 7
+      puts("  O\n\\ |  /\n  |\n/   \\ ")
+    end
   end
 end
+
+# def add_line_to_man(wrong_answers)
+#   if wrong_answers == 1
+#     puts("O")
+#   elsif wrong_answers == 2
+#     puts("O\n|")
+#   elsif wrong_answers == 3
+#     puts("  O\n\\ |")
+#   elsif wrong_answers == 4
+#     puts("  O\n\\ |  /")
+#   elsif wrong_answers == 5
+#     puts("  O\n\\ |  /\n  |\n")
+#   elsif wrong_answers == 6
+#     puts("  O\n\\ |  /\n  |\n/")
+#   elsif wrong_answers == 7
+#     puts("  O\n\\ |  /\n  |\n/   \\ ")
+#   end
+# end
 
 def check_if_word_is_complete(word, empty_word)
   word != empty_word.join("")
