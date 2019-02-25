@@ -1,5 +1,5 @@
 require_relative "renderers.rb"
-# require_relative "guirenderer.rb"
+require_relative "guirenderer.rb"
 
 def game_start
   word = generate_word
@@ -68,7 +68,7 @@ def get_display_method_from_player
   elsif method_number == 3
     return renderer = EmojiRenderer.new
   elsif method_number == 4
-    return renderer = LittleManRenderer.new
+    return renderer = GuiRenderer.new
   end
 end
 
