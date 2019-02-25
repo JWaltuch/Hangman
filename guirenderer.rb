@@ -44,8 +44,6 @@ class GuiRenderer
         session.print output
         session.close
       end
-    ensure
-      @server.close
     end
   end
 
