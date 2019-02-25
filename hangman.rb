@@ -2,7 +2,7 @@ def game_start
   word = generate_word
   player_name = get_player_name
   greet_player(player_name)
-  display_method = get_display_method_from_player
+  renderer = get_display_method_from_player
   empty_word = get_empty_word(word)
   display_empty_word(empty_word)
   word_is_incomplete = true
@@ -14,7 +14,7 @@ def game_start
       resolve_successful_guess(letter, word, empty_word)
     else
       wrong_answers += 1
-      resolve_bad_guess(letter, wrong_answers, display_method)
+      resolve_bad_guess(letter, wrong_answers, renderer)
     end
     display_empty_word(empty_word)
     word_is_incomplete = check_if_word_is_complete(word, empty_word)
@@ -58,7 +58,15 @@ def get_display_method_from_player
     puts("Please make a valid choice of 1-4.")
     method_number = gets.chomp.to_i
   end
-  method_number
+  if method_number == 1
+    return renderer = LittleManRenderer.new
+  elsif method_number == 2
+    return renderer = LittleManRenderer.new
+  elsif method_number == 3
+    return renderer = LittleManRenderer.new
+  elsif method_number == 4
+    return renderer = LittleManRenderer.new
+  end
 end
 
 def display_empty_word(empty_word)
@@ -105,9 +113,8 @@ def resolve_successful_guess(letter, word, empty_word)
   add_letter_to_word(letter, word, empty_word)
 end
 
-def resolve_bad_guess(letter, wrong_answers, display_method)
+def resolve_bad_guess(letter, wrong_answers, renderer)
   display_bad_guess_message(letter)
-  renderer = LittleManRenderer.new()
   renderer.render(wrong_answers)
 end
 
