@@ -1,3 +1,6 @@
+require_relative "renderers.rb"
+# require_relative "guirenderer.rb"
+
 def game_start
   word = generate_word
   player_name = get_player_name
@@ -61,9 +64,9 @@ def get_display_method_from_player
   if method_number == 1
     return renderer = LittleManRenderer.new
   elsif method_number == 2
-    return renderer = LittleManRenderer.new
+    return renderer = SimpleRenderer.new
   elsif method_number == 3
-    return renderer = LittleManRenderer.new
+    return renderer = EmojiRenderer.new
   elsif method_number == 4
     return renderer = LittleManRenderer.new
   end
@@ -115,7 +118,7 @@ end
 
 def resolve_bad_guess(letter, wrong_answers, renderer)
   display_bad_guess_message(letter)
-  renderer.render(wrong_answers)
+  puts(renderer.render(wrong_answers))
 end
 
 def find_letter_in_word(word, letter)
